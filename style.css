@@ -1,0 +1,255 @@
+*,*::after,*::before{
+    box-sizing: border-box;
+    margin: 0%;
+    padding: 0%;
+
+}
+:root{
+    /*colors*/
+ --avatar: hsl(246, 80%, 60%); 
+--work: hsl(15, 100%, 70%);
+--play: hsl(195, 74%, 62%);
+--study: hsl(348, 100%, 68%);
+--exercise: hsl(145, 58%, 55%);
+--social: hsl(264, 64%, 52%);
+--self-care: hsl(43, 84%, 65%);
+
+/*neutral*/
+--Very-dark-blue: hsl(226, 43%, 10%);
+--Dark-blue: hsl(235, 46%, 20%);
+--Desaturated-blue: hsl(235, 45%, 61%);
+--Pale-Blue: hsl(236, 100%, 87%); 
+
+/*var*/
+--bg: var(--Dark-blue);
+--time: 200ms;
+--ease:ease-in-out;
+--snap: cubic-bezier(0.72,-0.20.24,1.14);
+}
+
+body{
+    font-family: 'Rubik',sans-serif;
+    background-color: var(--Very-dark-blue);
+    color: white;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    /* gap: clamp(1rem,3vw,2rem); */
+}
+@media screen and (min-width:480px)  {
+    .container{
+        
+        flex-wrap: nowrap;
+        flex-direction: row;
+        width:100%;
+        max-width: 800px;
+        height:100%;
+        max-height: 400px;
+    }
+    .time-card-container{
+        flex: 1 1 80%;
+        display: flex;
+        flex-wrap: wrap;
+        
+    }
+   
+    .time-frame{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+    .profile-top{
+        flex-wrap: wrap;
+        align-items: start;
+        align-content: start;
+    
+        gap: 2rem;
+        padding: 0rem 2rem;
+    }
+    .profile-top h1{
+        font-size: 28px;
+        
+    }
+    .current{
+        font-size: 2.5rem!important;
+    }
+    .time-amt{
+     
+        display: flex; /* Flexbox for vertical stacking */
+    flex-direction: column; /* Stack items vertically */
+    gap: 0.5rem; /* Add space between elements */
+    align-items: flex-start!important; /* Align items to the start of the container */
+    }
+}
+@media screen and (min-width:1024px) {
+    .time-card-container{
+        flex: 1 1 80%;
+        grid-template-columns: repeat(3, 1fr);
+        
+    }
+}
+
+.pcard>div{
+    background-color: var(--bg);
+    
+}
+.profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 25%;
+    border-radius: 1rem;
+    
+    background-color: var(--bg);
+    margin:.5rem
+}
+ .profile-top{
+   --bg: var(--avatar);
+   flex:1 1 80%;
+   
+   display: flex;
+   padding: 1rem;
+    border-radius: 1rem;
+   gap: 1rem;
+    align-items: center;
+} 
+.avimg{
+     width: clamp( 4rem, 4vw, 7.5rem) ;
+    border: 0.2rem solid white;
+    border-radius: 100vw;
+    object-fit: cover;
+    flex: 0 1 20%;
+    aspect-ratio: 1/1;
+    
+}
+h1{
+    flex: 1 1 80%;
+    font-size: 18px;
+    font-weight: 300;
+
+}
+h1>span{
+    font-size: .7rem ;
+    font-weight: 500;
+    color: var(--Pale-Blue);
+}
+.time-frame{
+    display: flex;
+    --bg:var(--Dark-blue);
+    justify-content: center;
+    align-content: center;
+    gap: 1rem;
+    padding: 1rem .5rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius:1rem;
+}
+.btn{
+    font: inherit;
+    background: none;
+    border: none;
+    color: var(--Desaturated-blue);
+    flex: 1 1 100%;
+    border-radius: 0.5rem;
+    padding: 0rem; 
+    cursor:grab;
+    box-shadow: 
+    0 0 0 -.5rem var(--bg),
+    0 0 0 -.5rem var(--avatar); 
+    transition:box-shadow var(--time) var(--snap),
+     color var(--time) var(--ease);
+}
+.btn:focus{
+    outline: none;
+}
+.btn:focus-within{
+    box-shadow: 
+    0 0 0 .1rem var(--bg),
+    0 0 0 .4rem var(--avatar);
+}
+.btn:where(:hover){
+    color:white;
+}
+.card{
+    border-radius: 1rem;
+    margin: .5rem;
+    flex: 1 1 30%;
+}
+.card-down{
+    padding: 1rem;
+    background-color: var(--bg);
+    border-radius: 1rem;
+}
+.work{
+    
+    background-color: var(--work);
+}
+.play{
+    background-color: var(--play);
+}
+.study{
+    background-color: var(--study);
+}
+.exercise{
+    background-color: var(--exercise);
+}
+.social{
+    background-color: var(--social);
+}
+.selfcare{
+    background-color: var(--self-care);
+}
+.card-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.time-amt{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.card-down:hover{
+    background-color: rgb(60, 45, 119);
+}
+.card-down{
+    display: grid;
+    gap: clamp(.5rem,4vw,2rem);
+
+}
+h2{
+    font-size: 1rem;
+    font-weight: 400;
+}
+.current{
+    font-size: 1.8rem;
+    font-weight: 250;
+}
+
+.previous{
+    font-size: .8rem;
+    font-weight: 350;
+    color: var(--Desaturated-blue);
+    margin: 0; 
+}
+.card-up{
+    position: relative;
+    padding-top: 2.2rem;
+    overflow: hidden;
+}
+.icon{
+    position: absolute;
+    top:-.7rem;
+    right:1rem;
+    z-index: 0;
+}
