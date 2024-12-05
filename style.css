@@ -42,7 +42,7 @@ body{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-
+    width:110%;
     /* gap: clamp(1rem,3vw,2rem); */
 }
 @media screen and (min-width:480px)  {
@@ -53,15 +53,20 @@ body{
         width:100%;
         max-width: 800px;
         height:100%;
-        max-height: 400px;
+        max-height: 380px;
     }
-    .time-card-container{
+    /* .time-card-container{
         flex: 1 1 80%;
         display: flex;
         flex-wrap: wrap;
-        
+        gap: 0rem;
+    } */
+    .time-card-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 0rem; /* Controls spacing between rows and columns */
     }
-   
+    
     .time-frame{
         display: flex;
         flex-direction: column;
@@ -79,6 +84,9 @@ body{
         font-size: 28px;
         
     }
+    .profile{
+        margin: 0.5rem!important;
+    }
     .current{
         font-size: 2.5rem!important;
     }
@@ -88,6 +96,10 @@ body{
     flex-direction: column; /* Stack items vertically */
     gap: 0.5rem; /* Add space between elements */
     align-items: flex-start!important; /* Align items to the start of the container */
+    }
+    .card{
+        max-height:170px;
+        margin:.5rem;
     }
 }
 @media screen and (min-width:1024px) {
@@ -110,7 +122,8 @@ body{
     border-radius: 1rem;
     
     background-color: var(--bg);
-    margin:.5rem
+    margin-top: 2rem;
+    margin-bottom:1rem;
 }
  .profile-top{
    --bg: var(--avatar);
@@ -171,17 +184,25 @@ h1>span{
     outline: none;
 }
 .btn:focus-within{
-    box-shadow: 
+    /* box-shadow: 
     0 0 0 .1rem var(--bg),
-    0 0 0 .4rem var(--avatar);
+    0 0 0 .4rem var(--avatar); */
+    color:white;
 }
 .btn:where(:hover){
     color:white;
 }
-.card{
-    border-radius: 1rem;
-    margin: .5rem;
-    flex: 1 1 30%;
+[role="tabpanel"][aria-hidden="true"]{
+    display: none;
+}
+.card {
+    border-radius: 1rem; /* Keeps the rounded corners */
+    
+    margin-bottom: 1rem; /* Space between the cards themselves */
+    flex: 1 1 30%; /* Flex properties */
+    display: flex; /* Ensure it adjusts to content inside */
+    flex-direction: column; /* Stack children vertically */
+    align-items: stretch; /* Prevent gaps due to alignment */
 }
 .card-down{
     padding: 1rem;
@@ -220,11 +241,11 @@ h1>span{
     width: 100%;
 }
 .card-down:hover{
-    background-color: rgb(60, 45, 119);
+    background-color: #34397B;
 }
 .card-down{
     display: grid;
-    gap: clamp(.5rem,4vw,2rem);
+    gap: clamp(.5rem,4vw,1rem);
 
 }
 h2{
@@ -249,7 +270,8 @@ h2{
 }
 .icon{
     position: absolute;
-    top:-.7rem;
+    top:-1rem;
     right:1rem;
     z-index: 0;
+    transform: scale(0.8);
 }
