@@ -19,7 +19,12 @@
 --Dark-blue: hsl(235, 46%, 20%);
 --Desaturated-blue: hsl(235, 45%, 61%);
 --Pale-Blue: hsl(236, 100%, 87%); 
+--white: hsl(0, 0%, 100%);
 
+/*light-mode*/
+--background-color-light: hsl(225, 40%, 96%);
+    --text-color-light: hsl(0, 7%, 21%);
+    --card-bg-light: hsl(204, 86%, 26%);
 /*var*/
 --bg: var(--Dark-blue);
 --time: 200ms;
@@ -30,11 +35,12 @@
 body{
     font-family: 'Rubik',sans-serif;
     background-color: var(--Very-dark-blue);
-    color: white;
+    color: var(--white);
     display: grid;
     place-items: center;
     min-height: 100vh;
     padding: 2rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 
@@ -80,12 +86,13 @@ body{
         gap: 2rem;
         padding: 0rem 2rem;
     }
-    .profile-top h1{
-        font-size: 28px;
+    .username{
+        font-size: 28px!important;
         
     }
     .profile{
         margin: 0.5rem!important;
+        display: relative;
     }
     .current{
         font-size: 2.5rem!important;
@@ -100,6 +107,7 @@ body{
     .card{
         max-height:170px;
         margin:.5rem;
+        transition: background-color 0.3s ease;
     }
 }
 @media screen and (min-width:1024px) {
@@ -120,10 +128,11 @@ body{
     justify-content: space-between;
     flex: 1 1 25%;
     border-radius: 1rem;
-    
+    transition: background-color 0.3s ease;
     background-color: var(--bg);
     margin-top: 2rem;
     margin-bottom:1rem;
+    
 }
  .profile-top{
    --bg: var(--avatar);
@@ -144,16 +153,19 @@ body{
     aspect-ratio: 1/1;
     
 }
-h1{
+.username{
     flex: 1 1 80%;
     font-size: 18px;
     font-weight: 300;
 
 }
-h1>span{
-    font-size: .7rem ;
+.reprt{
+    font-size: .7rem!important ;
     font-weight: 500;
     color: var(--Pale-Blue);
+}
+h1{
+    gap: 0rem;
 }
 .time-frame{
     display: flex;
@@ -173,7 +185,7 @@ h1>span{
     flex: 1 1 100%;
     border-radius: 0.5rem;
     padding: 0rem; 
-    cursor:grab;
+    cursor:pointer;
     box-shadow: 
     0 0 0 -.5rem var(--bg),
     0 0 0 -.5rem var(--avatar); 
@@ -190,8 +202,10 @@ h1>span{
     color:white;
 }
 .btn:where(:hover){
-    color:white;
+    color:(--white);
 }
+
+
 [role="tabpanel"][aria-hidden="true"]{
     display: none;
 }
@@ -203,11 +217,27 @@ h1>span{
     display: flex; /* Ensure it adjusts to content inside */
     flex-direction: column; /* Stack children vertically */
     align-items: stretch; /* Prevent gaps due to alignment */
+   
+}
+.profile:hover{
+    transform: scale(1.1); /* Scale up on hover */
+    z-index: 10;
+    
+}
+.card:hover {
+    transform: scale(1.1); /* Scale up on hover */
+    z-index: 10; /* Make the hovered card appear above others */
+    
+}
+.card:hover .card-up,
+.card:hover .card-down {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
 }
 .card-down{
     padding: 1rem;
     background-color: var(--bg);
     border-radius: 1rem;
+    cursor: pointer;
 }
 .work{
     
@@ -275,3 +305,255 @@ h2{
     z-index: 0;
     transform: scale(0.8);
 }
+.theme-toggle {
+    position: relative;
+    width: 60px; /* Width of the toggle button */
+    height: 30px; /* Height of the toggle button */
+    background-color: var(--background-color-light); /* Button background */
+    border-radius: 15px; /* Makes it a pill shape */
+    display: flex; /* Enables flex alignment */
+    align-items: center;
+    justify-content: space-between; /* Positions icons on either end */
+    padding: 0 5px; /* Padding inside the toggle button */
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+    transition: background-color 0.3s ease;
+}
+
+body.light .theme-toggle{
+    background-color: var(--Very-dark-blue);
+}
+.theme-toggle svg {
+    width: 20px; /* Icon size */
+    height: 20px;
+    flex-shrink: 0; /* Prevent shrinking */
+    z-index: 10; /* Ensure icons are on top of the moving circle */
+}
+
+body .theme-toggle .toggle-circle {
+    position: absolute;
+    top: 3px; /* Centers the circle vertically */
+
+    width: 24px;
+    height: 24px;
+   
+    border-radius: 50%;
+    transition: left 0.3s var(--snap); /* Smooth slide animation */
+    z-index: 2;
+}
+body .theme-toggle .toggle-circle {
+    left: 35px!important; /* Position in dark mode */
+}
+body.light .theme-toggle .toggle-circle {
+    left: 5px!important; /* Position in light mode */
+}
+.sun{
+    top:5px;
+    z-index: 10;
+    margin-left: 2px;
+    margin-top: 2px;
+}
+.moon{
+    top:5px;
+    bottom:10px;
+    
+    margin-bottom: 0px;
+    margin-top: 4px;
+    margin-left: 10px;
+
+    z-index: 10;
+}
+.topdiv {
+    position: absolute; 
+    top: 0; /* Align it to the top of the page */
+    right: 0; /* Align it to the rightmost side */
+    margin: 1rem; /* Add some margin to avoid sticking to the edges */
+}
+.theme-toggle{
+    background-color: var(--background-color-light);
+} 
+
+body {
+    background-color: var(--Very-dark-blue);
+}
+body.light{
+    background-color: var(--background-color-light);
+}
+body.light .container .time-card-container .card .card-down{
+    background-color: var(--card-bg-light);
+}
+body.light .container .profile{
+    background-color: var(--card-bg-light);
+}
+
+body.light .theme-icon.sun {
+    color: #000000; /* Bright yellow for light mode */
+}
+
+body.light .theme-icon.moon {
+    color: #888888; /* Soft gray for light mode */
+}
+
+body .theme-icon.sun {
+    color: #f9d71c; /* Yellow for the dark mode */
+}
+
+body .theme-icon.moon {
+    color: #ffebeb; /* White for the dark mode */
+}
+body.light .toggle-circle {
+    background-color:#f9d71c; 
+}
+
+/* Dark mode */
+body .toggle-circle {
+    background-color:var(--Very-dark-blue) 
+}
+.modal {
+    position: absolute; /* Stays in place over the whole viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black backdrop */
+    display: flex; /* Centers the modal content */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensures it's on top of other elements */
+    visibility:hidden; /* Initially hidden */
+    opacity: 0; /* Smooth transition effect */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  /* Modal Content Box */
+  .modal-content {
+    background-color: var(--avatar);
+    border-radius: 10px;
+    padding: 2rem;
+    width: 300px; /* Adjust as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1010; /* On top of backdrop */
+    text-align: left;
+    visibility: hidden;
+  }
+  .modal.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  .modal.show .modal-content{
+    visibility: visible;
+    opacity: 1;
+  }
+  .modal-content div {
+    display: flex; /* Aligns buttons in a row */
+    justify-content: space-between; /* Adds spacing between buttons */
+    gap: 10px; /* Optional: Space between buttons */
+  }
+  
+  button {
+    display: inline-flex; /* Ensures text and icon align horizontally */
+    align-items: center; /* Vertically centers the text and icon */
+    padding: 8px 12px; /* Adjust button padding */
+    border: none; /* Optional: Remove button border */
+    background-color: #f0f0f0; /* Optional: Button background */
+    cursor: pointer; /* Adds a pointer cursor */
+    border-radius: 4px; /* Optional: Rounded corners */
+  }
+  
+  button svg {
+    width: 16px; /* Adjust width of the icon */
+    height: 16px; /* Adjust height of the icon */
+    margin-left: 8px; /* Space between text and icon */
+  }
+
+.modal-content label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px; 
+    font-weight: bold;
+    text-align: left; 
+  }
+  
+ 
+  .modal-content input {
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 15px; 
+    font-size: 16px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px;  
+    box-sizing: border-box; 
+    outline: none;
+  }
+  
+  .modal-content input:focus {
+    border-color: #007bff; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .modal-content button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px; 
+  }
+  
+  .modal-content .cancel {
+    background-color: #f44336; /* Red color */
+    color: white;
+  }
+  
+  .modal-content .save {
+    background-color: #4CAF50; /* Green color */
+    color: white;
+  }
+  
+
+
+.tooltip {
+  position: absolute; /* Position relative to parent container */
+  top: 50px; /* Adjust based on avatar's position */
+  left: 50%; /* Center it horizontally */
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0; 
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1001; 
+}
+.tooltip.show {
+  opacity: 1;
+  visibility: visible;
+}
+.avimg {
+    position: relative;
+    border-radius: 50%; 
+    border: 3px solid transparent; 
+    transition: border-color 0.3s ease; 
+  }
+  
+  .avimg.blinking {
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% {
+      border-color: transparent; 
+    }
+    50% {
+      border-color: #ff9800; 
+    }
+  }
+  .card-up {
+    display: inline-block; /* Ensure the hover is applied properly */
+  }
+  .option:hover path {
+    fill: white; /* Change the icon color to white */
+    transition: fill 0.3s ease; /* Smooth transition */
+  }
